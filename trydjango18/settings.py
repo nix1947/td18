@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-@f%4e-%wu0ri(b%yv$_eu3!eo3rmdm4&6m#%tgvj-x3t37yey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = ['*']
 
 #Email setting
 EMAIL_HOST = 'smtp.gmail.com'
@@ -91,8 +93,10 @@ WSGI_APPLICATION = 'trydjango18.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER': 'trydjango18',
+        'PASSWORD': 'trydjango18',
     }
 }
 
@@ -116,14 +120,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 ##static url also follow the pattern of app/static/app directory method
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+STATIC_ROOT = 'staticfiles'
+os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'assets'),
         ) #assets is the development collection, while static_root is the production collection.
     
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_ROOT = 'mediafiles'
+#os.path.join(os.path.dirname(BASE_DIR), 'media')
 
 #PROTECTED_MEDIA
 #PROTECTED_ROOT see theses stuff.
@@ -137,3 +143,7 @@ REGISTRATION_AUTO_LOGIN = True
 #Django site app not activated by default
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+
+##Postgres Database settings
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
