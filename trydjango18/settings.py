@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'trydjango18.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'trydjango18',
         'USER': 'trydjango18',
         'PASSWORD': 'trydjango18',
     }
@@ -147,3 +147,6 @@ LOGIN_REDIRECT_URL = '/'
 ##Postgres Database settings
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
